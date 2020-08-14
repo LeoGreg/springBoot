@@ -16,6 +16,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.validation.Valid;
 import javax.validation.constraints.Max;
+import java.awt.print.Book;
 import java.util.List;
 
 @RestController
@@ -27,19 +28,8 @@ public class ShooterController {
 
     @Autowired
     private EntityManager entityManager;
-/*
 
-    @Override
-    public List<Book> searchByName(String name) throws RuntimeException {
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<Book> cq = cb.createQuery(Book.class);
-        Root<Book> card = cq.from(Book.class);
-        Predicate carNumberPredict = cb.like(card.get("name"), "%" + name + "%");
-        cq.where(carNumberPredict);
-        TypedQuery<Book> query = em.createQuery(cq);
-        return query.getResultList();
-    }
- */
+
 
     @PostMapping("/add")
     public ResponseEntity addShooter(@Valid @RequestBody MovieShooter movieShooter) {

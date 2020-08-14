@@ -4,6 +4,7 @@ package com.example.demo.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -37,7 +38,7 @@ public class User {
     @Pattern(regexp = "[A-Z]{2,}[a-z]{2,}[0-9]{2,}[~!@#$%^&*()_|<>?]{2,}", message = "password has to have upper,lower case letters at least 2 of each of them numbers and punctuations again 2 of them at least")
     private String username;
 
-    @Pattern(regexp = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,5}", message = "plz insert a real g mail")
+    @Pattern(regexp = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,5}", message = "plz insert a real g-mail")
     private String g_mail;
 
     private int status;
@@ -46,6 +47,7 @@ public class User {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Pattern(regexp = "[A-Z]{2,}[a-z]{2,}[0-9]{3,}[~!@#$%^&*()_+|:'><?.,/]{2,}")
     private String password;
+
 
     @CreationTimestamp
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")

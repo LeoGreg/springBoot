@@ -1,5 +1,6 @@
 package com.example.demo.controller.advice;
 
+import com.example.demo.util.exception.file.*;
 import com.example.demo.util.exception.user.userException.DuplicateUserException;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
@@ -24,8 +25,54 @@ public class ExceptionToStatusConverter {
     @ResponseBody
     @ExceptionHandler(RuntimeException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    String runTime(DuplicateUserException e) {
+    String runTime(RuntimeException e) {
         log.info(">>>" + e.getMessage() + ":");
         return e.getMessage();
     }
+    @ResponseBody
+    @ExceptionHandler(FileNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    String not(FileNotFoundException e) {
+        log.info(">>>" + e.getMessage() + ":");
+        return e.getMessage();
+    }
+
+
+
+    @ResponseBody
+    @ExceptionHandler(NoDirectoryException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    String no(NoDirectoryException e) {
+        log.info(">>>" + e.getMessage() + ":");
+        return e.getMessage();
+    }
+
+    @ResponseBody
+    @ExceptionHandler(NoResourceException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    String not(NoResourceException e) {
+        log.info(">>>" + e.getMessage() + ":");
+        return e.getMessage();
+    }
+
+    @ResponseBody
+    @ExceptionHandler(LeakageException.class)
+    @ResponseStatus(HttpStatus.UNAVAILABLE_FOR_LEGAL_REASONS)
+    String leakage(LeakageException e) {
+        log.info(">>>" + e.getMessage() + ":");
+        return e.getMessage();
+    }
+
+
+   /* @ResponseBody
+    @ExceptionHandler(MultipartFilesOutOfOrderException.class)
+    @ResponseStatus(HttpStatus.UNAVAILABLE_FOR_LEGAL_REASONS)
+    String mul(MultipartFilesOutOfOrderException e) {
+        log.info(">>>" + e.getMessage() + ":");
+        return e.getMessage();
+    }*/
+
+
+
+
 }

@@ -9,9 +9,13 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.client.RestTemplate;
 
+
+
 @EnableAsync
 @SpringBootApplication
-public class DemoApplication {
+public class DemoApplication  {
+
+
 
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
@@ -37,12 +41,17 @@ public class DemoApplication {
 
 
     @Bean
-    public TaskExecutor taskExecutorNormal() {
+    public TaskExecutor fileMultipleUpload() {
         ThreadPoolTaskExecutor threadPoolTaskExecutor = new ThreadPoolTaskExecutor();
         threadPoolTaskExecutor.setCorePoolSize(5);
-        threadPoolTaskExecutor.setMaxPoolSize(50);
-        threadPoolTaskExecutor.setQueueCapacity(100);
+        threadPoolTaskExecutor.setMaxPoolSize(5);
+        threadPoolTaskExecutor.setKeepAliveSeconds(60*60*60);
+        threadPoolTaskExecutor.setQueueCapacity(10);
         return threadPoolTaskExecutor;
     }
+
+
+
+
 
 }
