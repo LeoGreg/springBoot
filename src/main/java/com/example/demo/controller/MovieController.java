@@ -10,7 +10,7 @@ import javax.validation.Valid;
 
 
 @RestController
-@RequestMapping("/movie")
+@RequestMapping("/api/movie")
 public class MovieController {
 
     @Autowired
@@ -28,7 +28,7 @@ public class MovieController {
         return ResponseEntity.ok(movieRepository.findAllByMovieShooterName(movieShooterName));
     }
 
-    @GetMapping("/findByBook/{name}")
+    @GetMapping("/findByMovieName/{name}")
     public ResponseEntity findByName(@PathVariable String name){
         return ResponseEntity.ok(movieRepository.findAllByName(name));
     }

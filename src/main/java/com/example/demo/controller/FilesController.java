@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Hashtable;
@@ -26,7 +27,7 @@ import java.util.Map;
 @Data
 @Log4j2
 @RestController
-@RequestMapping("/files")
+@RequestMapping("/api/files")
 public class FilesController {
 
     @Autowired
@@ -79,6 +80,11 @@ public class FilesController {
                 .contentType(MediaType.parseMediaType(contentType))
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
                 .body(resource);
+    }
+    @DeleteMapping("/del/{id}")
+    public ResponseEntity delete(@PathVariable int id){
+        fileHandlerService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

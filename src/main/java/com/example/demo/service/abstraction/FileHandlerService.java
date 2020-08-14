@@ -19,6 +19,8 @@ public interface FileHandlerService {
 
     void checkCountBeforeStore(MultipartFile[] files) throws LeakageException;
 
+    void delete(int id);
+
   /*  @Transactional
     File storeMultiple(MultipartFile file) throws FileNotFoundException, LeakageException, MultipartFilesOutOfOrderException;
 

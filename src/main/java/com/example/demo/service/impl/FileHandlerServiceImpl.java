@@ -139,4 +139,10 @@ public class FileHandlerServiceImpl implements FileHandlerService {
         }
     }
 
+    @Override
+    @Transactional
+    public void delete(int id){
+        fileRepository.deleteById(id);
+    }
+
 }
