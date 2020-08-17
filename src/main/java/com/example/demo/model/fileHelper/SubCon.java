@@ -1,4 +1,4 @@
-package com.example.demo.model.info;
+package com.example.demo.model.fileHelper;
 
 public interface SubCon {
     int SUB_NUM=22;

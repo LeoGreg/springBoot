@@ -1,7 +1,7 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.model.File;
-import com.example.demo.model.info.LocationToStore;
+import com.example.demo.util.component.FileLocationToStore;
 import com.example.demo.repository.FileRepository;
 import com.example.demo.service.abstraction.FileMultipleService;
 import com.example.demo.util.exception.file.FileNotFoundException;
@@ -36,9 +36,9 @@ public class FileMultipleImpl implements FileMultipleService {
 
 
     @Autowired
-    public FileMultipleImpl(LocationToStore locationToStore) throws NoDirectoryException {
+    public FileMultipleImpl(FileLocationToStore fileLocationToStore) throws NoDirectoryException {
 
-        this.path = Paths.get(locationToStore.getLoc()).toAbsolutePath().normalize();
+        this.path = Paths.get(fileLocationToStore.getLoc()).toAbsolutePath().normalize();
         try {
             Files.createDirectories(this.path);
         } catch (IOException e) {

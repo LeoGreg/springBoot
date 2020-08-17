@@ -1,12 +1,14 @@
 package com.example.demo.util.encoder;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
 
-public class Md5Encoder {
+public class Md5Encoder implements PasswordEncoder {
 
-    public static String encode(CharSequence rawPassword) {
+    public String encode(CharSequence rawPassword) {
         try {
             MessageDigest digest = MessageDigest.getInstance("MD5");
             digest.update(rawPassword.toString().getBytes());
@@ -22,13 +24,14 @@ public class Md5Encoder {
             }
             return hexString.toString();
         } catch (NoSuchAlgorithmException e) {
-             return null;
+            return null;
         }
     }
 
 
-
-    public static boolean matches(String plain,String encoded){
+    public boolean matches(CharSequence plain, String encoded) {
         return Objects.equals(encode(plain), encoded);
     }
+
+
 }

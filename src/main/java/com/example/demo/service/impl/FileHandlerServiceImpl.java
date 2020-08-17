@@ -1,7 +1,7 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.model.File;
-import com.example.demo.model.info.LocationToStore;
+import com.example.demo.util.component.FileLocationToStore;
 import com.example.demo.repository.FileRepository;
 import com.example.demo.service.abstraction.FileHandlerService;
 import com.example.demo.service.abstraction.FileMultipleService;
@@ -43,9 +43,9 @@ public class FileHandlerServiceImpl implements FileHandlerService {
 
 
     @Autowired
-    public FileHandlerServiceImpl(LocationToStore locationToStore) throws NoDirectoryException {
+    public FileHandlerServiceImpl(FileLocationToStore fileLocationToStore) throws NoDirectoryException {
 
-        this.path = Paths.get(locationToStore.getLoc()).toAbsolutePath().normalize();
+        this.path = Paths.get(fileLocationToStore.getLoc()).toAbsolutePath().normalize();
         try {
             Files.createDirectories(this.path);
         } catch (IOException e) {

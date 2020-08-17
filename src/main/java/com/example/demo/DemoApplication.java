@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.example.demo.util.encoder.Md5Encoder;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -7,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.client.RestTemplate;
 
 
@@ -45,11 +47,15 @@ public class DemoApplication  {
         ThreadPoolTaskExecutor threadPoolTaskExecutor = new ThreadPoolTaskExecutor();
         threadPoolTaskExecutor.setCorePoolSize(5);
         threadPoolTaskExecutor.setMaxPoolSize(5);
-        threadPoolTaskExecutor.setKeepAliveSeconds(60*60*60);
+        threadPoolTaskExecutor.setKeepAliveSeconds(60*60*24);
         threadPoolTaskExecutor.setQueueCapacity(10);
         return threadPoolTaskExecutor;
     }
 
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        return new Md5Encoder();
+    }
 
 
 

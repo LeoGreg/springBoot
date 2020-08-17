@@ -1,7 +1,7 @@
 package com.example.demo.controller.advice;
 
 import com.example.demo.util.exception.file.*;
-import com.example.demo.util.exception.user.userException.DuplicateUserException;
+import com.example.demo.util.exception.user.userException.*;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -29,6 +29,7 @@ public class ExceptionToStatusConverter {
         log.info(">>>" + e.getMessage() + ":");
         return e.getMessage();
     }
+
     @ResponseBody
     @ExceptionHandler(FileNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
@@ -36,7 +37,6 @@ public class ExceptionToStatusConverter {
         log.info(">>>" + e.getMessage() + ":");
         return e.getMessage();
     }
-
 
 
     @ResponseBody
@@ -63,15 +63,37 @@ public class ExceptionToStatusConverter {
         return e.getMessage();
     }
 
-
-   /* @ResponseBody
-    @ExceptionHandler(MultipartFilesOutOfOrderException.class)
-    @ResponseStatus(HttpStatus.UNAVAILABLE_FOR_LEGAL_REASONS)
-    String mul(MultipartFilesOutOfOrderException e) {
+    @ResponseBody
+    @ExceptionHandler(UnauthorizedException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    String un(UnauthorizedException e) {
         log.info(">>>" + e.getMessage() + ":");
         return e.getMessage();
-    }*/
+    }
 
+    @ResponseBody
+    @ExceptionHandler(UserNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    String notFound(UserNotFoundException e) {
+        log.info(">>>" + e.getMessage() + ":");
+        return e.getMessage();
+    }
+
+    @ResponseBody
+    @ExceptionHandler(UnverifiedException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    String st(UnverifiedException e) {
+        log.info(">>>" + e.getMessage() + ":");
+        return e.getMessage();
+    }
+
+    @ResponseBody
+    @ExceptionHandler(AccessDeniedException.class)
+    @ResponseStatus(HttpStatus.EXPECTATION_FAILED)
+    String sat(AccessDeniedException e) {
+        log.info(">>>" + e.getMessage() + ":");
+        return e.getMessage();
+    }
 
 
 

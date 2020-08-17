@@ -1,6 +1,7 @@
 package com.example.demo.model;
 
 
+import com.example.demo.model.ISP.UserStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
@@ -14,6 +15,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -41,7 +43,10 @@ public class User {
     @Pattern(regexp = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,5}", message = "plz insert a real g-mail")
     private String g_mail;
 
-    private int status;
+    @Enumerated
+    @Column(name = "status", nullable = false)
+    private UserStatus status;
+
 
     @NotBlank
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
@@ -62,7 +67,13 @@ public class User {
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
 
-    @Transient
+ /*   @Transient
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private Date dateOfBirth;
+    private Date dateOfBirth;*/
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_authority",
+    joinColumns = @JoinColumn(name = "user_id",referencedColumnName = "id"),
+    inverseJoinColumns = @JoinColumn(name = "authority_id",referencedColumnName = "id"))
+    private List<Authority> authorities;
 }

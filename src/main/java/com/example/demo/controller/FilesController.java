@@ -1,11 +1,10 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.File;
-import com.example.demo.model.info.LocationToStore;
-import com.example.demo.model.info.SubCon;
+import com.example.demo.model.fileHelper.LocationToStore;
+import com.example.demo.model.fileHelper.SubCon;
 import com.example.demo.service.abstraction.FileHandlerService;
 import com.example.demo.util.exception.file.LeakageException;
-import com.example.demo.util.exception.file.MultipartFilesOutOfOrderException;
 import com.example.demo.util.exception.file.NoResourceException;
 import lombok.Data;
 import lombok.extern.log4j.Log4j2;
@@ -17,7 +16,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Hashtable;
