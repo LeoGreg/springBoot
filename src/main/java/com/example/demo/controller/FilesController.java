@@ -1,9 +1,10 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.File;
-import com.example.demo.model.fileHelper.LocationToStore;
+
 import com.example.demo.model.fileHelper.SubCon;
 import com.example.demo.service.abstraction.FileHandlerService;
+import com.example.demo.util.component.FileLocationToStore;
 import com.example.demo.util.exception.file.LeakageException;
 import com.example.demo.util.exception.file.NoResourceException;
 import lombok.Data;
@@ -11,6 +12,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +33,7 @@ public class FilesController {
     @Autowired
     private FileHandlerService fileHandlerService;
     @Autowired
-    private LocationToStore locationToStore;
+    private FileLocationToStore locationToStore;
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.MULTIPART_FORM_DATA_VALUE, value = "/up")
     public ResponseEntity upload(@RequestParam(SubCon.FILE_NAME) MultipartFile file) throws LeakageException {
@@ -46,7 +48,7 @@ public class FilesController {
         Map<String, String> info = new Hashtable<>();
         info.put("location :", locationToStore.getLoc());
         info.put("name :", locationToStore.getLoc().substring(SubCon.SUB_NUM));
-        ResponseEntity bodyBuilder = ResponseEntity.status(200).contentType(MediaType.APPLICATION_JSON).body(info);
+        ResponseEntity bodyBuilder = ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(info);
         return bodyBuilder;
 
     }
@@ -59,7 +61,7 @@ public class FilesController {
         for (int i = 0; i < files.length; i++) {
             info.put("file name number :" + (i + 1), files[i].getOriginalFilename());
         }
-        ResponseEntity bodyBuilder = ResponseEntity.status(200).contentType(MediaType.APPLICATION_JSON).body(info);
+        ResponseEntity bodyBuilder = ResponseEntity.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON).body(info);
         return bodyBuilder;
 
     }
