@@ -1,15 +1,17 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.DTO.RecoverPasswordDto;
-import com.example.demo.model.DTO.UsernameVerifyDto;
+import com.example.demo.configs.UserDetailsServiceImpl;
+import com.example.demo.model.DTO.*;
 import com.example.demo.model.User;
 import com.example.demo.service.abstraction.UserService;
 import com.example.demo.util.exception.user.userException.*;
 import lombok.Data;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.enterprise.inject.Stereotype;
@@ -22,10 +24,26 @@ import javax.validation.Valid;
 @RequestMapping("/api/accounts")
 public class AccountsController {
 
+
+    @Autowired
+    @Qualifier("detailImpl")
+    private UserDetailsServiceImpl userDetailsService;
+
     @Autowired
     private UserService userService;
 
-    @PostMapping
+    @PostMapping("/login")
+    public ResponseEntity login(@Valid @RequestBody LoginPasswordDto login) throws UserNotFoundException, UnauthorizedException, UnverifiedException {
+        User user = userService.login(login.getPassword(), login.getUsername());
+        return ResponseEntity.ok(user);
+    }
+
+    @PostMapping("/changePassword")
+    public ResponseEntity change(@Valid @RequestBody ChangePasswordDto c) throws UnauthorizedException, UserNotFoundException, UnverifiedException {
+        return ResponseEntity.ok(userService.changePassword(c.getUsername(), c.getPassword(), c.getNewPassword()));
+    }
+
+    @PostMapping("/register")
     public ResponseEntity register(@Valid @RequestBody User user, HttpServletRequest request) throws DuplicateUserException {
         log.info(">>>register method:");
         log.info(">>>user ip {}", request.getRemoteAddr());
@@ -35,15 +53,15 @@ public class AccountsController {
     }
 
     @PostMapping("/forget")
-    public ResponseEntity forgetPassword(@RequestParam String username) throws UserNotFoundException {
-        log.info(">>>for get password method:");
-        userService.sendCode(username);
+    public ResponseEntity forgetPassword(@RequestBody ForgetResendDto f) throws UserNotFoundException {
+        log.info(">>>for get password method: username", f.getUsername());
+        userService.sendCode(f.getUsername());
         return ResponseEntity.ok().build();
     }
 
     @PostMapping("/resend")
-    public ResponseEntity resend(@RequestParam String username) throws UserNotFoundException {
-        userService.sendCode(username);
+    public ResponseEntity resend(@RequestBody ForgetResendDto f) throws UserNotFoundException {
+        userService.sendCode(f.getUsername());
         return ResponseEntity.ok().build();
     }
 

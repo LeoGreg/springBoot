@@ -2,6 +2,7 @@ package com.example.demo.service.abstraction;
 
 import com.example.demo.model.User;
 import com.example.demo.util.exception.user.userException.*;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import javax.transaction.Transactional;
 
@@ -16,7 +17,7 @@ public interface UserService {
     @Transactional
     User login(String password, String username) throws UnauthorizedException, UserNotFoundException, UnverifiedException;
 
-    User changePassword(String username, String password, String newPassword) throws UserNotFoundException, UnauthorizedException;
+    User changePassword(String username, String password, String newPassword) throws UserNotFoundException, UnauthorizedException, UnverifiedException;
 
     @Transactional
     void sendCode(String username) throws UserNotFoundException;
@@ -24,4 +25,6 @@ public interface UserService {
     //rec-pass
     @Transactional
     void recoverPassword(String username, String code, String password) throws UserNotFoundException, UnauthorizedException, AccessDeniedException;
+
+    void makeAdmin(String username) throws UsernameNotFoundException, UserNotFoundException;
 }

@@ -12,11 +12,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.client.RestTemplate;
 
 
-
 @EnableAsync
 @SpringBootApplication
-public class DemoApplication  {
-
+public class DemoApplication {
 
 
     public static void main(String[] args) {
@@ -47,17 +45,15 @@ public class DemoApplication  {
         ThreadPoolTaskExecutor threadPoolTaskExecutor = new ThreadPoolTaskExecutor();
         threadPoolTaskExecutor.setCorePoolSize(5);
         threadPoolTaskExecutor.setMaxPoolSize(5);
-        threadPoolTaskExecutor.setKeepAliveSeconds(60*60*24);
+        threadPoolTaskExecutor.setKeepAliveSeconds(60 * 60 * 24);
         threadPoolTaskExecutor.setQueueCapacity(10);
         return threadPoolTaskExecutor;
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new Md5Encoder();
     }
-
-
 
 
 }

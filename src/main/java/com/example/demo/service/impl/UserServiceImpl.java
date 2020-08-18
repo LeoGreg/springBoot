@@ -16,6 +16,7 @@ import com.example.demo.util.generator.GeneratorStaticNum;
 import lombok.Data;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -80,10 +81,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public User changePassword(String username, String password, String newPassword) throws UserNotFoundException, UnauthorizedException {
+    public User changePassword(String username, String password, String newPassword) throws UserNotFoundException, UnauthorizedException, UnverifiedException {
         User user = userRepository.getByUsername(username);
         UserExceptionHandler.isThereUserWithGivenUsername(user);
-        UserExceptionHandler.checkPassword(password, newPassword);
+        UserExceptionHandler.checkPassword(password, user.getPassword());
+        UserExceptionHandler.ifUserLocked(user.getStatus());
         user.setPassword(passwordEncoder.encode(newPassword));
         userRepository.save(user);
         return user;
@@ -109,5 +111,15 @@ public class UserServiceImpl implements UserService {
         UserExceptionHandler.isThereUserWithGivenUsername(user);
         UserExceptionHandler.checkCodes(user.getCode(), code);
         user.setPassword(passwordEncoder.encode(password));
+        userRepository.save(user);
+    }
+
+    @Override
+    public void makeAdmin(String username) throws UserNotFoundException {
+        User user = userRepository.getByUsername(username);
+        UserExceptionHandler.isThereUserWithGivenUsername(user);
+        Authority authority = authorityRepository.getById(AuthorityIdes.ADMIN_ROLE_ID);
+        user.getAuthorities().add(authority);
+        userRepository.save(user);
     }
 }

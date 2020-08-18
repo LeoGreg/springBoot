@@ -5,11 +5,10 @@ import lombok.Data;
 import javax.validation.constraints.NotBlank;
 
 @Data
-public class UsernameVerifyDto {
+public class LoginPasswordDto {
 
     @NotBlank
     private String username;
-
     @NotBlank
-    private String code;
+    private String password;
 }

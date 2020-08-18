@@ -1,8 +1,11 @@
 package com.example.demo.configs;
 
+import com.example.demo.util.constants.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -13,6 +16,9 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import javax.annotation.Priority;
+
+@Order//default lowest
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(jsr250Enabled = true/*,securedEnabled = true,prePostEnabled = true*/)
@@ -24,8 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
-/*    @Autowired
-    private MyBasicAuthenticationEntryPoint authenticationEntryPoint;*/
+
 
 
     @Override
@@ -38,9 +43,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().authorizeRequests()
                 .antMatchers("/api/accounts/**").permitAll()
-                .antMatchers(HttpMethod.DELETE, "/api/files/**").denyAll()
-                .antMatchers(HttpMethod.DELETE).hasAuthority("ROLE_ADMIN")
-                .antMatchers(HttpMethod.GET, "/api/movie/**").hasAuthority("ROLE_USER")
+                .antMatchers("/api/metadata/**").permitAll()
+                .antMatchers("/api/files/**").hasAuthority(Constants.USER)
                 .antMatchers("/api/**").authenticated();
 
     }
