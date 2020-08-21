@@ -10,7 +10,10 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 
+import javax.sql.DataSource;
 
 @EnableAsync
 @SpringBootApplication
@@ -54,6 +57,9 @@ public class DemoApplication {
     public PasswordEncoder passwordEncoder() {
         return new Md5Encoder();
     }
-
+    @Bean
+    public TokenStore tokenStore(DataSource d){
+        return new JdbcTokenStore(d);
+    }
 
 }

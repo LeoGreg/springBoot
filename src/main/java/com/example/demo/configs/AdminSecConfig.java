@@ -35,14 +35,16 @@ public class AdminSecConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.antMatcher("/api/**")
+        http.antMatcher("/adm/**")
                 .httpBasic().and()
                 .csrf().disable()
                 .cors().disable()
                 .headers().frameOptions().disable()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().authorizeRequests()
-                .antMatchers(HttpMethod.DELETE).hasAuthority(Constants.ADMIN);
+                .antMatchers("/adm/admin/**").hasAuthority(Constants.ADMIN)
+                .antMatchers(HttpMethod.DELETE).hasAuthority(Constants.ADMIN)
+                .antMatchers("/adm/**").authenticated();
     }
 
 

@@ -3,7 +3,6 @@ package com.example.demo.controller;
 import com.example.demo.model.Movie;
 import com.example.demo.model.MovieShooter;
 import com.example.demo.repository.ShooterRepository;
-import org.hibernate.Criteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,12 +14,10 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.validation.Valid;
-import javax.validation.constraints.Max;
-import java.awt.print.Book;
-import java.util.List;
+
 
 @RestController
-@RequestMapping("/shooter")
+@RequestMapping("/api/shooter")
 public class ShooterController {
 
     @Autowired

@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import com.example.demo.configs.UserDetailsServiceImpl;
 import com.example.demo.model.DTO.*;
 import com.example.demo.model.User;
 import com.example.demo.service.abstraction.UserService;
@@ -8,13 +7,8 @@ import com.example.demo.util.exception.user.userException.*;
 import lombok.Data;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
-
-import javax.enterprise.inject.Stereotype;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -25,18 +19,15 @@ import javax.validation.Valid;
 public class AccountsController {
 
 
-    @Autowired
-    @Qualifier("detailImpl")
-    private UserDetailsServiceImpl userDetailsService;
 
     @Autowired
     private UserService userService;
 
-    @PostMapping("/login")
+ /*   @PostMapping("/login")
     public ResponseEntity login(@Valid @RequestBody LoginPasswordDto login) throws UserNotFoundException, UnauthorizedException, UnverifiedException {
         User user = userService.login(login.getPassword(), login.getUsername());
         return ResponseEntity.ok(user);
-    }
+    }*/
 
     @PostMapping("/changePassword")
     public ResponseEntity change(@Valid @RequestBody ChangePasswordDto c) throws UnauthorizedException, UserNotFoundException, UnverifiedException {

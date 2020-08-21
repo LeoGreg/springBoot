@@ -94,7 +94,12 @@ public class ExceptionToStatusConverter {
         log.info(">>>" + e.getMessage() + ":");
         return e.getMessage();
     }
-
-
+    @ResponseBody
+    @ExceptionHandler(PressedFileException.class)
+    @ResponseStatus(HttpStatus.UNAVAILABLE_FOR_LEGAL_REASONS)
+    String satF(PressedFileException e) {
+        log.info(">>>" + e.getMessage() + ":");
+        return e.getMessage();
+    }
 
 }

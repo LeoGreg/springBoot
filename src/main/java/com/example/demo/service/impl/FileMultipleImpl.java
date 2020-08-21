@@ -1,6 +1,7 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.model.File;
+import com.example.demo.service.impl.metaConstants.Meta;
 import com.example.demo.util.component.FileLocationToStore;
 import com.example.demo.repository.FileRepository;
 import com.example.demo.service.abstraction.FileMultipleService;
@@ -53,7 +54,7 @@ public class FileMultipleImpl implements FileMultipleService {
     public File storeMultiple(MultipartFile file) throws FileNotFoundException, LeakageException {
         try {
             log.info("time {}",new Date());
-            LeakageException.isOutOfLimit(file.getSize() > 2 * 125000000, "leakage");
+            LeakageException.isOutOfLimit(file.getSize() > Meta.MAX_UP, "leakage");
             log.info(">>>thread name {} ,id {}", Thread.currentThread().getName(), Thread.currentThread().getId());
             log.info(">>>size {} ", file.getSize());
             String fileName = StringUtils.cleanPath(file.getOriginalFilename());

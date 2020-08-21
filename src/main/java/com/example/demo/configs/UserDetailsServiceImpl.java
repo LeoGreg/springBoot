@@ -3,7 +3,6 @@ package com.example.demo.configs;
 import com.example.demo.model.ISP.UserStatus;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
-import com.example.demo.util.exception.user.userExceptionHandler.UserExceptionHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.LockedException;

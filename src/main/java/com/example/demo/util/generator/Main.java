@@ -65,10 +65,11 @@ public class Main {
             i.a(d);
         }
     }*/
-    class Copier<T extends A> {
-        public T copy(T param) throws CloneNotSupportedException {
-            return  (T) param.clone();                            //1
-        }
+//    class Copier<T extends A> {
+//        public T copy(T param) throws CloneNotSupportedException {
+//            return  (T) param.clone();       /**/                     //1
+
+/*  }
     }
 
 class A  implements Cloneable{
@@ -90,4 +91,16 @@ class B extends A{
         A a = copier.copy(b);                                //4
         System.out.println(a.i);
     }
-}
+}*/
+/*
+class  A{
+    public static void main(String[] args) {
+        File file = new File("C:\\Users\\User\\Desktop\\uploads\\");
+        long freeSpace = file.getFreeSpace();
+        long total=file.getTotalSpace();
+       long us= file.getUsableSpace();
+        System.out.println(freeSpace);
+        System.out.println(total);
+        System.out.println(us);
+    }
+}*/
