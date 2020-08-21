@@ -41,7 +41,6 @@ public class Oauth2Configuration extends ResourceServerConfigurerAdapter {
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().authorizeRequests()
                 .antMatchers("/api/accounts/**").hasAuthority(Constants.USER).
-
                 antMatchers("/api/**").authenticated();
     }
 
