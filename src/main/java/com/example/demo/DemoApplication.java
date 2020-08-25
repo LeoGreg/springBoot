@@ -1,8 +1,10 @@
 package com.example.demo;
 
+import com.example.demo.controller.MetadataController;
 import com.example.demo.util.encoder.Md5Encoder;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.web.servlet.MultipartAutoConfiguration;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.task.TaskExecutor;
@@ -12,16 +14,17 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import javax.sql.DataSource;
 
 @EnableAsync
-@SpringBootApplication
+@SpringBootApplication()
 public class DemoApplication {
 
 
     public static void main(String[] args) {
-        SpringApplication.run(DemoApplication.class, args);
+        SpringApplication.run(DemoApplication.class,  args);
     }
 
 
@@ -57,9 +60,11 @@ public class DemoApplication {
     public PasswordEncoder passwordEncoder() {
         return new Md5Encoder();
     }
+
     @Bean
     public TokenStore tokenStore(DataSource d){
         return new JdbcTokenStore(d);
     }
+
 
 }

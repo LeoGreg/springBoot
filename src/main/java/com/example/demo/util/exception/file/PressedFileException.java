@@ -1,6 +1,6 @@
 package com.example.demo.util.exception.file;
 
-import com.example.demo.service.impl.MetaDataServiceImpl;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;

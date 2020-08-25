@@ -2,7 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.model.File;
 
-import com.example.demo.model.fileHelper.SubCon;
+import com.example.demo.util.constants.fileHelper.SubCon;
 import com.example.demo.service.abstraction.FileHandlerService;
 import com.example.demo.util.component.FileLocationToStore;
 import com.example.demo.util.exception.file.LeakageException;

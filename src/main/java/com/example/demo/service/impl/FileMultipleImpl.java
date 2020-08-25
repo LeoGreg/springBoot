@@ -1,7 +1,8 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.model.File;
-import com.example.demo.service.impl.metaConstants.Meta;
+
+import com.example.demo.util.constants.fileHelper.meta.Meta;
 import com.example.demo.util.component.FileLocationToStore;
 import com.example.demo.repository.FileRepository;
 import com.example.demo.service.abstraction.FileMultipleService;
