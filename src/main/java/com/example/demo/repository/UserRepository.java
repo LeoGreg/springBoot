@@ -12,8 +12,10 @@ import javax.validation.constraints.Pattern;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
 
-    @Query(nativeQuery = true,value = "SELECT * FROM user WHERE username=:Username")
+    @Query(nativeQuery = true, value = "SELECT * FROM user WHERE username=:Username")
     User getByUsername(@Param("Username") String username);
 
     User save(User user);
+
+
 }

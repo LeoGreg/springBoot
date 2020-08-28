@@ -56,6 +56,7 @@ public class DemoApplication {
         return threadPoolTaskExecutor;
     }
 
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new Md5Encoder();

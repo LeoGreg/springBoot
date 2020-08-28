@@ -6,9 +6,10 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.format.annotation.DateTimeFormat;
+
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -76,4 +77,5 @@ public class User {
     joinColumns = @JoinColumn(name = "user_id",referencedColumnName = "id"),
     inverseJoinColumns = @JoinColumn(name = "authority_id",referencedColumnName = "id"))
     private List<Authority> authorities;
+
 }

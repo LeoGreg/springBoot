@@ -67,4 +67,7 @@ public class AccountsController {
         userService.verify(u.getUsername(), u.getCode());
         return ResponseEntity.ok().build();
     }
+
+
+
 }

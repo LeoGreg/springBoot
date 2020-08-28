@@ -122,4 +122,6 @@ public class UserServiceImpl implements UserService {
         user.getAuthorities().add(authority);
         userRepository.save(user);
     }
+
+
 }

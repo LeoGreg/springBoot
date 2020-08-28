@@ -27,4 +27,5 @@ public interface UserService {
     void recoverPassword(String username, String code, String password) throws UserNotFoundException, UnauthorizedException, AccessDeniedException;
 
     void makeAdmin(String username) throws UsernameNotFoundException, UserNotFoundException;
+
 }
