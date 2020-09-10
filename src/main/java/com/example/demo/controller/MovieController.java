@@ -24,13 +24,18 @@ public class MovieController {
 
 
     @GetMapping("/findByShooter/{movieShooterName}")
-    public ResponseEntity findByShooterName(@PathVariable String movieShooterName){
+    public ResponseEntity findByShooterName(@PathVariable String movieShooterName) {
         return ResponseEntity.ok(movieRepository.findAllByMovieShooterName(movieShooterName));
     }
 
     @GetMapping("/findByMovieName/{name}")
-    public ResponseEntity findByName(@PathVariable String name){
+    public ResponseEntity findByName(@PathVariable String name) {
         return ResponseEntity.ok(movieRepository.findAllByName(name));
+    }
+
+    @GetMapping("by_id")
+    public ResponseEntity findByName(@RequestParam int id) {
+        return ResponseEntity.ok(movieRepository.getById(id));
     }
 
 }

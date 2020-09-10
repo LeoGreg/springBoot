@@ -2,6 +2,7 @@ package com.example.demo.controller.advice;
 
 import com.example.demo.util.exception.file.*;
 import com.example.demo.util.exception.user.userException.*;
+import com.example.demo.util.hessian.NotFoundException;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -18,6 +19,14 @@ public class ExceptionToStatusConverter {
     @ExceptionHandler(DuplicateUserException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
     String duplicate(DuplicateUserException e) {
+        log.info(">>>" + e.getMessage() + ":");
+        return e.getMessage();
+    }
+
+    @ResponseBody
+    @ExceptionHandler(NotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    String duplicate(NotFoundException e) {
         log.info(">>>" + e.getMessage() + ":");
         return e.getMessage();
     }

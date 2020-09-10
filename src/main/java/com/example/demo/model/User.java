@@ -59,18 +59,12 @@ public class User {
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     @Temporal(TemporalType.TIMESTAMP)
     private Date creationTime;
-    /*
-    1 if we consumes json but we get xml for example it'll cause 415 not supported
-    2 @Valid uses to secure model restrictions if sth goes wrong it'll cause 40 bad request
-     */
+
 
     @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
 
- /*   @Transient
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private Date dateOfBirth;*/
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_authority",
